@@ -53,7 +53,7 @@ const ContextProvider: React.FC = ({ children }) => {
     }
     if (Object.values(EvmChain).includes(chain as EvmChain)) {
       const { bloctoSDK } = ChainServices[chain];
-      await bloctoSDK?.ethereum?.request({ method: "eth_disconnect" });
+      await bloctoSDK?.ethereum?.request({ method: "wallet_disconnect" });
     }
     if (chain === Chains.Solana) {
       const { bloctoSDK } = ChainServices[chain];
