@@ -14,6 +14,7 @@ import ScriptTypes, {
   PerInfo,
   PerScriptAbi,
 } from "../types/ScriptTypes";
+import type { AptosTypes } from "@blocto/sdk";
 import Editor from "./Editor";
 
 const typeKeys = Object.values(AptosArgTypes);
@@ -36,7 +37,7 @@ const formatTransactionArgs = (args: Arg[] | undefined) => {
           : currentValue.value;
     }
     return initial;
-  }, {});
+  }, {}) as AptosTypes.SignMessagePayload;
 };
 
 const AptosEditor = (): ReactJSXElement => {
@@ -55,7 +56,7 @@ const AptosEditor = (): ReactJSXElement => {
   }, []);
 
   const handleSignMessage = useCallback((args) => {
-    return new Promise<void>((resolve) => {
+    return new Promise<AptosTypes.SignMessageResponse>((resolve) => {
       const aptos = ChainServices[Chains.Aptos]?.bloctoSDK?.aptos;
       resolve(aptos.signMessage(formatTransactionArgs(args)));
     });
@@ -122,7 +123,7 @@ const AptosEditor = (): ReactJSXElement => {
       isTransactionsExtraSignersAvailable
       isSandboxDisabled
       defaultTab={ScriptTypes.CONTRACT}
-      disabledTabs={[ScriptTypes.TX]}
+      disabledTabs={[ScriptTypes.TX, ScriptTypes.USER_OPERATION]}
       tabsShouldLoadDefaultTemplate={[
         ScriptTypes.SCRIPT,
         ScriptTypes.CONTRACT,
