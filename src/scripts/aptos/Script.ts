@@ -117,9 +117,16 @@ export const sendArgumentScript = {
         .map((arg: any) => arg.value);
       const normalArgs = args
         .filter((arg: any) => arg.type !== "type_arg")
-        .map((arg: any) =>
-          arg.type === AptosArgTypes.Array ? JSON.parse(arg.value) : arg.value
-        );
+        .map((arg: any) => {
+          try {
+            if (arg.type === AptosArgTypes.Array) return JSON.parse(arg.value);
+            if (arg.type === AptosArgTypes.Bool) return arg.value === "true";
+            if (arg.type === AptosArgTypes.Number) return Number(arg.value);
+          } catch (error) {
+            console.log(error);
+          }
+          return arg.value;
+        });
       const { bytecode } = scriptInfo;
       const abi = Object.keys(scriptAbi).reduce<Record<string, any>>(
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -166,6 +173,11 @@ export const sendArgumentScript = {
       comment:
         "Whether the function can be called as an entry function directly in a transaction",
       value: "true",
+      // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+      format: (value: any) => value.toLowerCase() === "true",
+    },
+    is_view: {
+      value: "false",
       // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
       format: (value: any) => value.toLowerCase() === "true",
     },
