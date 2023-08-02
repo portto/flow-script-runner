@@ -101,7 +101,7 @@ export const transferTokenScript = {
   ],
 };
 
-export const sendArgumentcript = {
+export const sendArgumentScript = {
   type: ScriptTypes.SCRIPT,
   script: "",
   description: "send argument test by sending a script payload transaction",
