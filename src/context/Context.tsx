@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import * as fcl from "@blocto/fcl";
 import { ChainServices } from "../services";
-import { Chains, ChainsType, EvmChain } from "../types/ChainTypes";
+import { Chains, ChainsType } from "../types/ChainTypes";
 import User from "../types/User";
 import { TabInfos } from "../components/Header";
 import { verifyAccountProofSignature } from "../utils/verifyAccountProofSignature";
@@ -56,14 +56,6 @@ const ContextProvider: React.FC = ({ children }) => {
       }
       return;
     }
-    if (Object.values(EvmChain).includes(chain as EvmChain)) {
-      const { bloctoSDK } = ChainServices[chain];
-      await bloctoSDK?.ethereum?.request({ method: "wallet_disconnect" });
-    }
-    if (chain === Chains.Solana) {
-      const { bloctoSDK } = ChainServices[chain];
-      await bloctoSDK?.solana?.request({ method: "disconnect" });
-    }
     if (chain === Chains.Aptos) {
       const { bloctoSDK } = ChainServices[chain];
       await bloctoSDK?.aptos.disconnect();
@@ -83,10 +75,7 @@ const ContextProvider: React.FC = ({ children }) => {
     }
 
     let accounts = [];
-    if (chain === Chains.Solana) {
-      const { bloctoSDK } = ChainServices[chain];
-      accounts = await bloctoSDK?.solana?.request({ method: "connect" });
-    } else if (chain === Chains.Aptos) {
+    if (chain === Chains.Aptos) {
       const { bloctoSDK } = ChainServices[chain];
       const result = await bloctoSDK?.aptos?.connect();
       accounts = [result.address];
