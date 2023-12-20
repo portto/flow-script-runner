@@ -24,6 +24,14 @@ import ParamEditor from "./ParamEditor";
 
 const MenuGroups = [{ title: "Request", templates: RequestTemplate }];
 
+const parseParamsValue = ([key, value]: string[]) => {
+  try {
+    return [key, JSON.parse(value)];
+  } catch (e) {
+    return [key, value];
+  }
+};
+
 const EvmRequestEditor = ({
   setRequestObject,
 }: {
@@ -43,7 +51,7 @@ const EvmRequestEditor = ({
   useEffect(() => {
     setRequestObject({
       method,
-      params: [Object.fromEntries(params)],
+      params: [Object.fromEntries(params.map(parseParamsValue))],
     });
   }, [method, params, setRequestObject]);
 
