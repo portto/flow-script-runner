@@ -254,12 +254,7 @@ const EvmEditor = (): ReactJSXElement => {
             </TabPanel>
             <TabPanel>
               <EvmSendEditor
-                setRequestObject={(params = []) =>
-                  setRequestObject({
-                    method: "eth_sendTransaction",
-                    params,
-                  })
-                }
+                setRequestObject={setRequestObject}
                 account={account}
               />
             </TabPanel>
