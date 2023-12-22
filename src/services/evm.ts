@@ -187,6 +187,12 @@ export const supportedChains = [
     faucet: "https://faucet.goerli.linea.build/",
     environment: "testnet",
   },
+  {
+    name: "zKatana Sepolia Testnet",
+    chainId: "0x133e40",
+    rpcUrls: ["https://rpc.startale.com/zkatana"],
+    environment: "testnet",
+  },
 ];
 
 const bloctoSDK = new BloctoSDK({
