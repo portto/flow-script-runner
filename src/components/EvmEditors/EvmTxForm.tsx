@@ -48,7 +48,12 @@ const EvmTxForm = ({
   }, [account]);
 
   return (
-    <Grid templateColumns="min-content 1fr" alignItems="center" gap={6}>
+    <Grid
+      templateColumns="min-content 1fr"
+      alignItems="center"
+      gap={6}
+      width="100%"
+    >
       <Box mx="10px">From:</Box>
       <Textarea
         rows={1}
