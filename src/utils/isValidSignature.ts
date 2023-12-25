@@ -26,15 +26,6 @@ const isValidSignature = async (
       );
       return isAuthorizedSigner;
     }
-    if (method === "eth_sign") {
-      const challenge = params?.[1];
-      const isAuthorizedSigner = await dappAuth.isAuthorizedSigner(
-        challenge,
-        signature,
-        address
-      );
-      return isAuthorizedSigner;
-    }
 
     const challenge = params?.[1];
     let formattedChallenge;
