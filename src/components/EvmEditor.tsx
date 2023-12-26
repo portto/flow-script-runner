@@ -249,6 +249,7 @@ const EvmEditor = (): ReactJSXElement => {
               <EvmUserOpEditor
                 setRequestObject={setRequestObject}
                 account={account}
+                chainId={chainId}
               />
             </TabPanel>
             <TabPanel>
