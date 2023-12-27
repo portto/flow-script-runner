@@ -8,7 +8,7 @@ import {
   Radio,
   RadioGroup,
 } from "@chakra-ui/react";
-import { AddIcon, CloseIcon } from "@chakra-ui/icons";
+import { AddIcon } from "@chakra-ui/icons";
 import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 import type { EthereumTypes } from "@blocto/sdk";
 import EvmTxForm from "./EvmTxForm";
@@ -20,17 +20,30 @@ interface EvmBatchTxEditorProps {
   account: string | null;
 }
 
+const RevertOptionMap: Record<string, any> = {
+  true: true,
+  false: false,
+  unset: undefined,
+};
+const emptyTx = {};
+
 const EvmBatchTxEditor = ({
   setRequestObject,
   account,
 }: EvmBatchTxEditorProps): ReactJSXElement => {
   const [revert, setRevert] = useState<string>("true");
-  const [txs, setTxs] = useState<any[]>([{}]);
+  const [txs, setTxs] = useState<any[]>([emptyTx]);
+
   useEffect(() => {
     if (account) {
       setRequestObject({
         method: "wallet_sendMultiCallTransaction",
-        params: [txs, revert === "true"],
+        params: [
+          txs,
+          ...(RevertOptionMap[revert] !== undefined
+            ? [RevertOptionMap[revert]]
+            : []),
+        ],
       });
     }
   }, [account, setRequestObject, revert, txs]);
@@ -46,8 +59,11 @@ const EvmBatchTxEditor = ({
           }}
         >
           <Flex gap="15px">
-            <Radio value="true">true</Radio>
-            <Radio value="false">false</Radio>
+            {Object.keys(RevertOptionMap).map((key) => (
+              <Radio key={key} value={key}>
+                {key}
+              </Radio>
+            ))}
           </Flex>
         </RadioGroup>
 
@@ -61,7 +77,7 @@ const EvmBatchTxEditor = ({
             size="xs"
             colorScheme="blue"
             onClick={() => {
-              setTxs((prev) => [...prev, ""]);
+              setTxs((prev) => [...prev, emptyTx]);
             }}
           />
         </Flex>
