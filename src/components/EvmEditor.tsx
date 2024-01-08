@@ -34,7 +34,6 @@ import ReactJson from "react-json-view";
 import isValidSignature from "../utils/isValidSignature";
 
 const signMethod = [
-  "eth_sign",
   "personal_sign",
   "eth_signTypedData",
   "eth_signTypedData_v3",
@@ -250,6 +249,7 @@ const EvmEditor = (): ReactJSXElement => {
               <EvmUserOpEditor
                 setRequestObject={setRequestObject}
                 account={account}
+                chainId={chainId}
               />
             </TabPanel>
             <TabPanel>

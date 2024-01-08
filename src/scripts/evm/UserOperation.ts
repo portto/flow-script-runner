@@ -51,9 +51,17 @@ export const getNft: IUserOperationTemplate = {
   },
 };
 
-export const sendTransaction: IUserOperationTemplate = {
+export const sendRawTransaction: IUserOperationTemplate = {
   id: "sendTransaction",
   name: "Send transaction",
+  userOpObj: {
+    callData: "",
+  },
+};
+
+export const sendContractTransaction: IUserOperationTemplate = {
+  id: "sendContractTransaction",
+  name: "Send Contract transaction",
   userOpObj: {
     callData: "",
   },

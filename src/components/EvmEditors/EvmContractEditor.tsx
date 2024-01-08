@@ -32,15 +32,19 @@ const EvmContractEditor = ({
   setDecodeType,
   account,
   chainId,
+  writeOnly,
 }: {
   setRequestObject: Dispatch<
     SetStateAction<EthereumTypes.EIP1193RequestPayload | undefined>
   >;
-  setDecodeType: Dispatch<SetStateAction<any>>;
+  setDecodeType?: Dispatch<SetStateAction<any>>;
   account: string | null;
   chainId: string | null;
+  writeOnly?: boolean;
 }): ReactJSXElement => {
-  const [requestMethod, setRequestMethod] = useState<string>("eth_call");
+  const [requestMethod, setRequestMethod] = useState<string>(
+    "eth_sendTransaction"
+  );
   const [contractAddress, setContractAddress] = useState<string>("");
   const [contractAbi, setContractAbi] = useState<string>("");
   const [methodName, setMethodName] = useState<string>("");
@@ -90,10 +94,12 @@ const EvmContractEditor = ({
             "latest",
           ],
         });
-        setDecodeType(
-          JSON.parse(contractAbi).find((m: any) => m.name === methodName)
-            .outputs
-        );
+        if (setDecodeType) {
+          setDecodeType(
+            JSON.parse(contractAbi).find((m: any) => m.name === methodName)
+              .outputs
+          );
+        }
       } else {
         setRequestObject({
           method: requestMethod,
@@ -132,35 +138,45 @@ const EvmContractEditor = ({
         <MenuList maxHeight={400} overflow="auto">
           {MenuGroups.map((menuGroup) => (
             <MenuGroup key={menuGroup.title} title={menuGroup.title}>
-              {Object.entries(menuGroup.templates).map(([name, template]) => (
-                <MenuItem
-                  key={name}
-                  pl={5}
-                  color="gray.700"
-                  onClick={() => {
-                    importTemplate(template);
-                  }}
-                >
-                  {template.description}
-                </MenuItem>
-              ))}
+              {Object.entries(menuGroup.templates)
+                .filter(
+                  // if writeOnly is true, only show write templates
+                  (item) =>
+                    !writeOnly || item[1].method === "eth_sendTransaction"
+                )
+                .map(([name, template]) => (
+                  <MenuItem
+                    key={name}
+                    pl={5}
+                    color="gray.700"
+                    onClick={() => {
+                      importTemplate(template);
+                    }}
+                  >
+                    {template.description}
+                  </MenuItem>
+                ))}
             </MenuGroup>
           ))}
         </MenuList>
       </Menu>
       <Grid templateRows="repeat(4, min-content)" gap="10px">
-        <Box fontWeight="bold">Method</Box>
-        <RadioGroup
-          value={requestMethod}
-          onChange={(e) => {
-            setRequestMethod(e);
-          }}
-        >
-          <Flex gap="15px">
-            <Radio value="eth_call">Read</Radio>
-            <Radio value="eth_sendTransaction">Write</Radio>
-          </Flex>
-        </RadioGroup>
+        {!writeOnly && (
+          <>
+            <Box fontWeight="bold">Method</Box>
+            <RadioGroup
+              value={requestMethod}
+              onChange={(e) => {
+                setRequestMethod(e);
+              }}
+            >
+              <Flex gap="15px">
+                <Radio value="eth_call">Read</Radio>
+                <Radio value="eth_sendTransaction">Write</Radio>
+              </Flex>
+            </RadioGroup>
+          </>
+        )}
         <Box fontWeight="bold">Contract info</Box>
         <Grid
           templateColumns="min-content 1fr"

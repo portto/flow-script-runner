@@ -25,6 +25,7 @@ import type { IUserOperationTemplate } from "../../scripts/evm/UserOperation";
 import EvmSendEditor from "./EvmSendEditor";
 import { AbiItem, numberToHex, isAddress, isHexStrict } from "web3-utils";
 import Web3EthAbi from "web3-eth-abi";
+import EvmContractEditor from "./EvmContractEditor";
 
 const MenuGroups = [{ title: "Request", templates: UserOperationTemplate }];
 const ABI: AbiItem = {
@@ -42,11 +43,13 @@ const ABI: AbiItem = {
 const EvmUserOpEditor = ({
   setRequestObject,
   account,
+  chainId,
 }: {
   setRequestObject: Dispatch<
     SetStateAction<EthereumTypes.EIP1193RequestPayload | undefined>
   >;
   account: string | null;
+  chainId: string | null;
 }): ReactJSXElement => {
   const [templateId, setTemplateId] = useState<string>("");
   const [callData, setCallData] = useState<string>("");
@@ -72,8 +75,8 @@ const EvmUserOpEditor = ({
   }, [account, callData, otherParam, setRequestObject]);
 
   const setTransactionToCallData = useCallback(
-    ([params]) => {
-      const { to, value = "0x", data = "0x" } = params;
+    ({ params }) => {
+      const { to, value = "0x", data = "0x" } = params[0];
 
       if (!isAddress(to) || !isHexStrict(data)) return;
 
@@ -121,8 +124,22 @@ const EvmUserOpEditor = ({
       {templateId === "sendTransaction" ? (
         <Box my="20px">
           <EvmSendEditor
+            setRequestObject={(params = []) =>
+              setTransactionToCallData({
+                method: "eth_sendTransaction",
+                params,
+              })
+            }
+            account={account}
+          />
+        </Box>
+      ) : templateId === "sendContractTransaction" ? (
+        <Box my="20px">
+          <EvmContractEditor
             setRequestObject={setTransactionToCallData}
             account={account}
+            chainId={chainId}
+            writeOnly
           />
         </Box>
       ) : (
