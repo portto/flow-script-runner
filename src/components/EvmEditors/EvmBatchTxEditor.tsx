@@ -21,8 +21,8 @@ interface EvmBatchTxEditorProps {
 }
 
 const RevertOptionMap: Record<string, any> = {
-  true: true,
   false: false,
+  true: true,
   unset: undefined,
 };
 const emptyTx = {};
