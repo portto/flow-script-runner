@@ -31,7 +31,7 @@ const EvmBatchTxEditor = ({
   setRequestObject,
   account,
 }: EvmBatchTxEditorProps): ReactJSXElement => {
-  const [revert, setRevert] = useState<string>("true");
+  const [revert, setRevert] = useState<string>("false");
   const [txs, setTxs] = useState<any[]>([emptyTx]);
 
   useEffect(() => {
