@@ -28,6 +28,7 @@ import EvmSignEditor from "./EvmEditors/EvmSignEditor";
 import EvmUserOpEditor from "./EvmEditors/EvmUserOpEditor";
 import EvmSendEditor from "./EvmEditors/EvmSendEditor";
 import EvmContractEditor from "./EvmEditors/EvmContractEditor";
+import EvmBatchTxEditor from "./EvmEditors/EvmBatchTxEditor";
 import type { EthereumTypes } from "@blocto/sdk";
 import { bloctoSDK, useEthereum, supportedChains, web3 } from "../services/evm";
 import ReactJson from "react-json-view";
@@ -233,6 +234,7 @@ const EvmEditor = (): ReactJSXElement => {
             <Tab>User Operation</Tab>
             <Tab>Send</Tab>
             <Tab>Contract</Tab>
+            <Tab>Batch Transaction</Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
@@ -254,12 +256,7 @@ const EvmEditor = (): ReactJSXElement => {
             </TabPanel>
             <TabPanel>
               <EvmSendEditor
-                setRequestObject={(params = []) =>
-                  setRequestObject({
-                    method: "eth_sendTransaction",
-                    params,
-                  })
-                }
+                setRequestObject={setRequestObject}
                 account={account}
               />
             </TabPanel>
@@ -269,6 +266,12 @@ const EvmEditor = (): ReactJSXElement => {
                 setDecodeType={setDecodeType}
                 account={account}
                 chainId={chainId}
+              />
+            </TabPanel>
+            <TabPanel>
+              <EvmBatchTxEditor
+                setRequestObject={setRequestObject}
+                account={account}
               />
             </TabPanel>
           </TabPanels>

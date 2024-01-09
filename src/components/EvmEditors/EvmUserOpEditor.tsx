@@ -22,10 +22,10 @@ import { EthereumTypes } from "@blocto/sdk";
 import ParamEditor from "./ParamEditor";
 import * as UserOperationTemplate from "../../scripts/evm/UserOperation";
 import type { IUserOperationTemplate } from "../../scripts/evm/UserOperation";
-import EvmSendEditor from "./EvmSendEditor";
 import { AbiItem, numberToHex, isAddress, isHexStrict } from "web3-utils";
 import Web3EthAbi from "web3-eth-abi";
 import EvmContractEditor from "./EvmContractEditor";
+import EvmSendEditor from "./EvmSendEditor";
 
 const MenuGroups = [{ title: "Request", templates: UserOperationTemplate }];
 const ABI: AbiItem = {
@@ -124,12 +124,7 @@ const EvmUserOpEditor = ({
       {templateId === "sendTransaction" ? (
         <Box my="20px">
           <EvmSendEditor
-            setRequestObject={(params = []) =>
-              setTransactionToCallData({
-                method: "eth_sendTransaction",
-                params,
-              })
-            }
+            setRequestObject={setTransactionToCallData}
             account={account}
           />
         </Box>
