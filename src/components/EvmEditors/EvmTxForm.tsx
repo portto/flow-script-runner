@@ -34,7 +34,11 @@ const EvmTxForm = ({
         sendObj.to = toString;
       }
       if (valueString) {
-        sendObj.value = web3.utils.toHex(valueString);
+        try {
+          sendObj.value = web3.utils.toHex(valueString);
+        } catch (e) {
+          setValue("");
+        }
       }
       if (dataString) {
         sendObj.data = dataString;
