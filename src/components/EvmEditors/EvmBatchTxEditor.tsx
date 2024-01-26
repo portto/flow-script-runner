@@ -90,12 +90,13 @@ const EvmBatchTxEditor = ({
               <Flex my="5px" alignItems="center">
                 <EvmTxForm
                   key={i}
-                  setTransactionObject={(tx) => {
-                    setTxs((prev) => {
-                      const newTxs = [...prev];
-                      newTxs[i] = tx;
-                      return newTxs;
-                    });
+                  setTransactionObject={(updatedTxs) => {
+                    if (updatedTxs)
+                      setTxs((prev) => {
+                        const newTxs = [...prev];
+                        newTxs[i] = updatedTxs[0];
+                        return newTxs;
+                      });
                   }}
                   account={account}
                 />
