@@ -203,6 +203,7 @@ const bloctoSDK = new BloctoSDK({
     rpc: isMainnet
       ? `https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`
       : "https://rpc.ankr.com/eth_goerli",
+    walletServer: process.env.REACT_APP_WALLET_SERVER,
   },
   appId: process.env.REACT_APP_DAPP_ID,
 }) as ExtendedEvmBloctoSDK;
