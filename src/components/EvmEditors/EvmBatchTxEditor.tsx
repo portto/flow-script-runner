@@ -7,8 +7,9 @@ import {
   IconButton,
   Radio,
   RadioGroup,
+  Button,
 } from "@chakra-ui/react";
-import { AddIcon } from "@chakra-ui/icons";
+import { CloseIcon } from "@chakra-ui/icons";
 import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 import type { EthereumTypes } from "@blocto/sdk";
 import EvmTxForm from "./EvmTxForm";
@@ -25,14 +26,13 @@ const RevertOptionMap: Record<string, any> = {
   true: true,
   unset: undefined,
 };
-const emptyTx = {};
 
 const EvmBatchTxEditor = ({
   setRequestObject,
   account,
 }: EvmBatchTxEditorProps): ReactJSXElement => {
   const [revert, setRevert] = useState<string>("false");
-  const [txs, setTxs] = useState<any[]>([emptyTx]);
+  const [txs, setTxs] = useState<any[]>();
 
   useEffect(() => {
     if (account) {
@@ -48,6 +48,26 @@ const EvmBatchTxEditor = ({
     }
   }, [account, setRequestObject, revert, txs]);
 
+  const addTransfer = () => {
+    const obj = {
+      value: "0x1",
+      to: "0x85fD692D2a075908079261F5E351e7fE0267dB02",
+      from: account,
+    };
+    setTxs((state) => {
+      return [...(state || []), obj];
+    });
+  };
+
+  const removeTransfer = (index: number) => {
+    setTxs((state) => {
+      if (Array.isArray(state) && state.length === 1) {
+        return [];
+      }
+      const newParam = [...(state || [])];
+      return newParam.splice(index, 1);
+    });
+  };
   return (
     <>
       <Grid templateRows="repeat(4, min-content)" gap="10px">
@@ -67,42 +87,49 @@ const EvmBatchTxEditor = ({
           </Flex>
         </RadioGroup>
 
-        <Flex>
+        <Flex alignItems="center">
           <Box fontWeight="bold">Transaction</Box>
-          <IconButton
-            ml={2}
-            aria-label="Add Transaction"
-            isRound
-            icon={<AddIcon />}
-            size="xs"
-            colorScheme="blue"
-            onClick={() => {
-              setTxs((prev) => [...prev, emptyTx]);
-            }}
-          />
+          <Button ml="10px" onClick={addTransfer}>
+            Transfer
+          </Button>
         </Flex>
         <Flex flexDir="column" mt={2} pl={4}>
-          {txs.map((value, i) => (
-            <Box key={i}>
-              <Text fontWeight="bold" mb={2}>
-                Transaction {i + 1}
-              </Text>
-              <Flex my="5px" alignItems="center">
-                <EvmTxForm
-                  key={i}
-                  setTransactionObject={(updatedTxs) => {
-                    if (updatedTxs)
-                      setTxs((prev) => {
-                        const newTxs = [...prev];
-                        newTxs[i] = updatedTxs[0];
-                        return newTxs;
-                      });
-                  }}
-                  account={account}
-                />
-              </Flex>
-            </Box>
-          ))}
+          {Array.isArray(txs) &&
+            txs?.length > 0 &&
+            txs?.map((value, i: number) => (
+              <Box key={i}>
+                <Flex alignItems="center">
+                  <Text fontWeight="bold" mb={2}>
+                    Transaction {i + 1}
+                  </Text>
+                  <IconButton
+                    ml={2}
+                    aria-label="Delete Arg"
+                    isRound
+                    icon={<CloseIcon />}
+                    size="xs"
+                    colorScheme="red"
+                    onClick={() => removeTransfer(i)}
+                  />
+                </Flex>
+                <Flex my="5px" alignItems="center">
+                  <EvmTxForm
+                    key={i}
+                    setTransactionObject={(updatedTxs) => {
+                      if (updatedTxs)
+                        setTxs((prev) => {
+                          const newTxs = [...(prev || [])];
+                          newTxs[i] = updatedTxs[0];
+                          return newTxs;
+                        });
+                    }}
+                    isCustom={true}
+                    account={account}
+                    customParams={value}
+                  />
+                </Flex>
+              </Box>
+            ))}
         </Flex>
       </Grid>
     </>

@@ -9,11 +9,15 @@ interface EvmTxFormProps {
     EthereumTypes.EIP1193RequestPayload["params"] | undefined
   >;
   account: string | null;
+  isCustom?: boolean;
+  customParams?: any;
 }
 
 const EvmTxForm = ({
   setTransactionObject,
   account,
+  isCustom = false,
+  customParams,
 }: EvmTxFormProps): ReactJSXElement => {
   const [fromString, setFrom] = useState<string>(account || "");
   const [toString, setTo] = useState<string>("");
@@ -48,8 +52,16 @@ const EvmTxForm = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account, fromString, toString, dataString, valueString]);
   useEffect(() => {
-    setFrom(account || "");
-  }, [account]);
+    if (!isCustom) {
+      setFrom(account || "");
+    } else {
+      setFrom(customParams.from || "");
+      setTo(customParams.to || "");
+      setValue(customParams.value || "");
+      setData(customParams.data || "");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [account, isCustom]);
 
   return (
     <Grid
