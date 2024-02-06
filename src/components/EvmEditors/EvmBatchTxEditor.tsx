@@ -13,6 +13,8 @@ import { CloseIcon } from "@chakra-ui/icons";
 import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 import type { EthereumTypes } from "@blocto/sdk";
 import EvmTxForm from "./EvmTxForm";
+import { web3 } from "../../services/evm";
+import erc721Abi from "../../contracts/abi/ERC721.json";
 
 interface EvmBatchTxEditorProps {
   setRequestObject: Dispatch<
@@ -59,6 +61,20 @@ const EvmBatchTxEditor = ({
     });
   };
 
+  const mintNFT = () => {
+    // TODO: wait backend provide all evm chain contract address
+    const contractAddr = "0x6bDa27BB78833658D19049118b73eC7b07815C8A"; // only scroll testnet
+    const contract = new web3.eth.Contract(erc721Abi as any, contractAddr);
+    const obj = {
+      from: account,
+      to: contractAddr,
+      data: contract.methods.mint(account).encodeABI(),
+    };
+    setTxs((state) => {
+      return [...(state || []), obj];
+    });
+  };
+
   const removeTransfer = (index: number) => {
     setTxs((state) => {
       if (Array.isArray(state) && state.length === 1) {
@@ -87,12 +103,20 @@ const EvmBatchTxEditor = ({
           </Flex>
         </RadioGroup>
 
-        <Flex alignItems="center">
+        <Grid
+          alignItems="center"
+          gap="10px"
+          gridAutoFlow="column"
+          justifyContent="left"
+        >
           <Box fontWeight="bold">Transaction</Box>
-          <Button ml="10px" onClick={addTransfer}>
+          <Button w="110px" onClick={addTransfer}>
             Transfer
           </Button>
-        </Flex>
+          <Button w="110px" onClick={mintNFT}>
+            Mint NFT
+          </Button>
+        </Grid>
         <Flex flexDir="column" mt={2} pl={4}>
           {Array.isArray(txs) &&
             txs?.length > 0 &&
