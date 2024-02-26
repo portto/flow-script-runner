@@ -13,6 +13,7 @@ const isMainnet = process.env.REACT_APP_NETWORK === "mainnet";
 const bloctoSDK = new BloctoSDK({
   aptos: {
     chainId: isMainnet ? 1 : 2,
+    server: process.env.REACT_APP_WALLET_SERVER,
   },
   appId: process.env.REACT_APP_DAPP_ID,
 }) as ExtendedAptosBloctoSDK;
