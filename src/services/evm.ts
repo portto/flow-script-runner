@@ -193,6 +193,19 @@ export const supportedChains = [
     rpcUrls: ["https://rpc.startale.com/zkatana"],
     environment: "testnet",
   },
+  {
+    name: "Blast",
+    chainId: "0x13e31",
+    rpcUrls: ["https://rpc.blast.io"],
+    environment: "mainnet",
+  },
+  {
+    name: "Blast Sepolia Testnet",
+    chainId: "0xa0c71fd",
+    rpcUrls: ["https://sepolia.blast.io"],
+    faucet: "https://faucet.quicknode.com/blast/sepolia",
+    environment: "testnet",
+  },
 ];
 
 const bloctoSDK = new BloctoSDK({
