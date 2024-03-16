@@ -1407,10 +1407,10 @@
     deepmerge "^4.2.2"
     sha3 "^2.1.4"
 
-"@blocto/sdk@^0.10.0-beta.0":
-  version "0.10.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@blocto/sdk/-/sdk-0.10.0-beta.0.tgz#794c300cafab5ab864dc1051ff5826c0f50d983d"
-  integrity sha512-McoZ+hGFqw7XqcCjhE3/IOLZiIGJw5Wxed0BkgK0obnTUo89ze2H0uVfRrKwGNTBtHp3z2/U/Wqr+mpAYg8ZuQ==
+"@blocto/sdk@^0.10.0-beta.1":
+  version "0.10.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@blocto/sdk/-/sdk-0.10.0-beta.1.tgz#cd10fd49211568524e118677bb03f2f78684fc53"
+  integrity sha512-cANWv5hKCTT8Xj0kOcv32WszoiC0lLQTciI5nv9zkZMTvq/NI+NZTCGFLJujoGzYdlpnPlfxMokJ/CVew3EHRw==
   dependencies:
     buffer "^6.0.3"
     eip1193-provider "^1.0.1"
@@ -7583,9 +7583,9 @@ focus-lock@^0.9.1:
     tslib "^2.0.3"
 
 follow-redirects@^1.0.0, follow-redirects@^1.14.0:
-  version "1.15.4"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.4.tgz#cdc7d308bf6493126b17ea2191ea0ccf3e535adf"
-  integrity sha512-Cr4D/5wlrb0z9dgERpUL3LrmPKVDsETIJhaCMeDfuFYcqa5bldGV6wBsAN6X/vxlXQtFBMrXdXxdL8CbDTGniw==
+  version "1.15.6"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.6.tgz#7f815c0cda4249c74ff09e95ef97c23b5fd0399b"
+  integrity sha512-wWN62YITEaOpSK584EZXJafH1AGpO8RVgElfkuXbTOrPX4fIfOyEpW/CsiNd8JdYrAoOvafRTOEnvsO++qCqFA==
 
 for-in@^1.0.2:
   version "1.0.2"
