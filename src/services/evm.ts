@@ -163,7 +163,7 @@ export const supportedChains = [
 const bloctoSDK = new BloctoSDK({
   ethereum: {
     // (required) chainId to be used
-    chainId: isMainnet ? "0x1" : "0x5",
+    chainId: isMainnet ? "0x1" : "0xaa36a7",
     // (required for Ethereum) JSON RPC endpoint
     rpc: isMainnet
       ? `https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`
