@@ -22,9 +22,7 @@ export enum EvmChainId {
   Avalanche = "0xa86a",
   AvalancheTestnet = "0xa869",
   Arbitrum = "0xa4b1",
-  ArbitrumTestnet = "0x66eed",
   Optimism = "0x000a",
-  OptimismTestnet = "0xaa37dc",
 }
 
 export type ChainsType = OtherChain;
