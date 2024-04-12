@@ -13,10 +13,6 @@ export const ContractInfos: ContractInfosType = {
     abi: valueDappAbi,
     address: "0x009c403BdFaE357d82AAef2262a163287c30B739",
   },
-  [EvmChainId.EthereumGoerli]: {
-    abi: valueDappAbi,
-    address: "0x009c403BdFaE357d82AAef2262a163287c30B739",
-  },
   [EvmChainId.Bsc]: {
     abi: valueDappAbi,
     address: "0x009c403BdFaE357d82AAef2262a163287c30B739",

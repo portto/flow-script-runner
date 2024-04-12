@@ -15,7 +15,6 @@ export enum EvmChain {
 
 export enum EvmChainId {
   Ethereum = "0x1",
-  EthereumGoerli = "0x5",
   Bsc = "0x38",
   BscTestnet = "0x61",
   Polygon = "0x89",
