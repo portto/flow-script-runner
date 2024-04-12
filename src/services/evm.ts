@@ -23,13 +23,6 @@ export const supportedChains = [
     environment: "mainnet",
   },
   {
-    name: "Ethereum Goerli",
-    chainId: "0x5",
-    rpcUrls: ["https://rpc.ankr.com/eth_goerli"],
-    faucet: "https://goerlifaucet.com/",
-    environment: "testnet",
-  },
-  {
     name: "Ethereum Sepolia",
     chainId: "0xaa36a7",
     rpcUrls: ["https://ethereum-sepolia.blockpi.network/v1/rpc/public"],
@@ -41,13 +34,6 @@ export const supportedChains = [
     chainId: "0xa4b1",
     rpcUrls: ["https://arb1.arbitrum.io/rpc"],
     environment: "mainnet",
-  },
-  {
-    name: "Arbitrum Goerli Testnet",
-    chainId: "0x66eed",
-    rpcUrls: ["https://goerli-rollup.arbitrum.io/rpc"],
-    faucet: "https://faucet.triangleplatform.com/arbitrum/goerli",
-    environment: "testnet",
   },
   {
     name: "Arbitrum Sepolia Testnet",
@@ -102,13 +88,6 @@ export const supportedChains = [
     environment: "mainnet",
   },
   {
-    name: "Optimism Testnet",
-    chainId: "0x1a4",
-    rpcUrls: ["https://goerli.optimism.io"],
-    faucet: "https://faucet.paradigm.xyz/",
-    environment: "testnet",
-  },
-  {
     name: "Optimism Sepolia Testnet",
     chainId: "0xaa37dc",
     rpcUrls: ["https://sepolia.optimism.io"],
@@ -120,13 +99,6 @@ export const supportedChains = [
     chainId: "0x2105",
     rpcUrls: ["https://mainnet.base.org"],
     environment: "mainnet",
-  },
-  {
-    name: "Base Goerli Testnet",
-    chainId: "0x14a33",
-    rpcUrls: ["https://goerli.base.org"],
-    faucet: "https://faucet.quicknode.com/base/goerli",
-    environment: "testnet",
   },
   {
     name: "Base Sepolia Testnet",
@@ -142,13 +114,6 @@ export const supportedChains = [
     environment: "mainnet",
   },
   {
-    name: "Zora Goerli Testnet",
-    chainId: "0x3E7",
-    rpcUrls: ["https://testnet.rpc.zora.energy"],
-    faucet: "https://testnet.zora.co",
-    environment: "testnet",
-  },
-  {
     name: "Zora Sepolia Testnet",
     chainId: "0x3b9ac9ff",
     rpcUrls: ["https://sepolia.rpc.zora.energy"],
@@ -162,12 +127,6 @@ export const supportedChains = [
     environment: "mainnet",
   },
   {
-    name: "Scroll Goerli Testnet",
-    chainId: "0x82751",
-    rpcUrls: ["https://alpha-rpc.scroll.io/l2"],
-    environment: "testnet",
-  },
-  {
     name: "Scroll Sepolia Testnet",
     chainId: "0x8274f",
     rpcUrls: ["https://sepolia-rpc.scroll.io"],
@@ -179,13 +138,6 @@ export const supportedChains = [
     chainId: "0xe708",
     rpcUrls: ["https://rpc.linea.build"],
     environment: "mainnet",
-  },
-  {
-    name: "Linea Goerli Testnet",
-    chainId: "0xe704",
-    rpcUrls: ["https://rpc.goerli.linea.build"],
-    faucet: "https://faucet.goerli.linea.build/",
-    environment: "testnet",
   },
   {
     name: "zKatana Sepolia Testnet",
@@ -211,11 +163,11 @@ export const supportedChains = [
 const bloctoSDK = new BloctoSDK({
   ethereum: {
     // (required) chainId to be used
-    chainId: isMainnet ? "0x1" : "0x5",
+    chainId: isMainnet ? "0x1" : "0xaa36a7",
     // (required for Ethereum) JSON RPC endpoint
     rpc: isMainnet
       ? `https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`
-      : "https://rpc.ankr.com/eth_goerli",
+      : "https://ethereum-sepolia.blockpi.network/v1/rpc/public",
     walletServer: process.env.REACT_APP_WALLET_SERVER,
   },
   appId: process.env.REACT_APP_DAPP_ID,
