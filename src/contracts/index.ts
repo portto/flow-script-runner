@@ -41,17 +41,9 @@ export const ContractInfos: ContractInfosType = {
     abi: valueDappAbi,
     address: "0x806243c7368a90D957592B55875eF4C3353C5bEa",
   },
-  [EvmChainId.ArbitrumTestnet]: {
-    abi: valueDappAbi,
-    address: "0x009c403BdFaE357d82AAef2262a163287c30B739",
-  },
   [EvmChainId.Optimism]: {
     abi: valueDappAbi,
     address: "0x806243c7368a90D957592B55875eF4C3353C5bEa",
-  },
-  [EvmChainId.OptimismTestnet]: {
-    abi: valueDappAbi,
-    address: "0x009c403BdFaE357d82AAef2262a163287c30B739",
   },
   [OtherChain.Aptos]: {
     address:
