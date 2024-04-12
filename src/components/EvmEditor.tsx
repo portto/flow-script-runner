@@ -272,6 +272,7 @@ const EvmEditor = (): ReactJSXElement => {
               <EvmBatchTxEditor
                 setRequestObject={setRequestObject}
                 account={account}
+                chainId={chainId}
               />
             </TabPanel>
           </TabPanels>
