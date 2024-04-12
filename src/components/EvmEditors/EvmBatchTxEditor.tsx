@@ -126,9 +126,11 @@ const EvmBatchTxEditor = ({
           <Button w="110px" onClick={addTransfer}>
             Transfer
           </Button>
-          <Button w="110px" onClick={mintNFT}>
-            Mint NFT
-          </Button>
+          {chainId === "0x8274f" && (
+            <Button w="110px" onClick={mintNFT}>
+              Mint NFT
+            </Button>
+          )}
           {chainId === "0xaa36a7" && (
             <Button w="110px" onClick={SwapToken}>
               Swap
