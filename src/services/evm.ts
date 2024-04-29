@@ -75,9 +75,9 @@ export const supportedChains = [
     environment: "mainnet",
   },
   {
-    name: "Polygon Testnet",
-    chainId: "0x13881",
-    rpcUrls: ["https://rpc-mumbai.maticvigil.com/"],
+    name: "Polygon Amoy Testnet",
+    chainId: "0x13882",
+    rpcUrls: ["https://rpc-amoy.polygon.technology/"],
     faucet: "https://faucet.polygon.technology/",
     environment: "testnet",
   },

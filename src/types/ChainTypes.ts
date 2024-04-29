@@ -18,7 +18,7 @@ export enum EvmChainId {
   Bsc = "0x38",
   BscTestnet = "0x61",
   Polygon = "0x89",
-  PolygonTestnet = "0x13881",
+  PolygonTestnet = "0x13882",
   Avalanche = "0xa86a",
   AvalancheTestnet = "0xa869",
   Arbitrum = "0xa4b1",
