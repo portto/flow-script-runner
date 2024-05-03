@@ -1407,10 +1407,10 @@
     deepmerge "^4.2.2"
     sha3 "^2.1.4"
 
-"@blocto/sdk@^0.10.0-beta.0":
-  version "0.10.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@blocto/sdk/-/sdk-0.10.0-beta.0.tgz#794c300cafab5ab864dc1051ff5826c0f50d983d"
-  integrity sha512-McoZ+hGFqw7XqcCjhE3/IOLZiIGJw5Wxed0BkgK0obnTUo89ze2H0uVfRrKwGNTBtHp3z2/U/Wqr+mpAYg8ZuQ==
+"@blocto/sdk@^0.10.2":
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/@blocto/sdk/-/sdk-0.10.2.tgz#d29c652d25ac367a3c8d5fabdcb770b5cbb07c1c"
+  integrity sha512-9gCIUKA7/7/hMHaa5n94+OYU/3tHd6vmBgTgv4o2h3z9SFueQXAJMO4aBggH9+EldgHQDI6wHsnvytEt9AWb6g==
   dependencies:
     buffer "^6.0.3"
     eip1193-provider "^1.0.1"
