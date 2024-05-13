@@ -158,6 +158,19 @@ export const supportedChains = [
     faucet: "https://faucet.quicknode.com/blast/sepolia",
     environment: "testnet",
   },
+  {
+    name: "Merlin",
+    chainId: "0x1068",
+    rpcUrls: ["https://rpc.merlinchain.io"],
+    environment: "mainnet",
+  },
+  {
+    name: "Merlin Testnet",
+    chainId: "0xa8a4c",
+    rpcUrls: ["https://testnet-rpc.merlinchain.io"],
+    faucet: "https://coinfaucet.eu/en/btc-testnet/",
+    environment: "testnet",
+  },
 ];
 
 const bloctoSDK = new BloctoSDK({
