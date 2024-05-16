@@ -166,7 +166,7 @@ export const supportedChains = [
   },
   {
     name: "Merlin Testnet",
-    chainId: "0xa8a4c",
+    chainId: "0xA7B14",
     rpcUrls: ["https://testnet-rpc.merlinchain.io"],
     faucet: "https://coinfaucet.eu/en/btc-testnet/",
     environment: "testnet",
