@@ -13,10 +13,6 @@ export const ContractInfos: ContractInfosType = {
     abi: valueDappAbi,
     address: "0x009c403BdFaE357d82AAef2262a163287c30B739",
   },
-  [EvmChainId.EthereumGoerli]: {
-    abi: valueDappAbi,
-    address: "0x009c403BdFaE357d82AAef2262a163287c30B739",
-  },
   [EvmChainId.Bsc]: {
     abi: valueDappAbi,
     address: "0x009c403BdFaE357d82AAef2262a163287c30B739",
@@ -31,7 +27,7 @@ export const ContractInfos: ContractInfosType = {
   },
   [EvmChainId.PolygonTestnet]: {
     abi: valueDappAbi,
-    address: "0x009c403BdFaE357d82AAef2262a163287c30B739",
+    address: "0x5cd3253E1F0A3b3EEA0562EA51EFCD86C04231d3",
   },
   [EvmChainId.Avalanche]: {
     abi: valueDappAbi,
@@ -45,17 +41,9 @@ export const ContractInfos: ContractInfosType = {
     abi: valueDappAbi,
     address: "0x806243c7368a90D957592B55875eF4C3353C5bEa",
   },
-  [EvmChainId.ArbitrumTestnet]: {
-    abi: valueDappAbi,
-    address: "0x009c403BdFaE357d82AAef2262a163287c30B739",
-  },
   [EvmChainId.Optimism]: {
     abi: valueDappAbi,
     address: "0x806243c7368a90D957592B55875eF4C3353C5bEa",
-  },
-  [EvmChainId.OptimismTestnet]: {
-    abi: valueDappAbi,
-    address: "0x009c403BdFaE357d82AAef2262a163287c30B739",
   },
   [OtherChain.Aptos]: {
     address:

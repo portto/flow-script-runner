@@ -1,84 +1,27 @@
-import React, { useEffect, useState, Dispatch } from "react";
-import { Box, Textarea, Grid } from "@chakra-ui/react";
+import React, { Dispatch, useCallback } from "react";
 import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 import type { EthereumTypes } from "@blocto/sdk";
-import { web3 } from "../../services/evm";
+import EvmTxForm from "./EvmTxForm";
 
 const EvmSendEditor = ({
   setRequestObject,
   account,
 }: {
-  setRequestObject: Dispatch<
-    EthereumTypes.EIP1193RequestPayload["params"] | undefined
-  >;
+  setRequestObject: Dispatch<EthereumTypes.EIP1193RequestPayload | undefined>;
   account: string | null;
 }): ReactJSXElement => {
-  const [fromString, setFrom] = useState<string>(account || "");
-  const [toString, setTo] = useState<string>("");
-  const [valueString, setValue] = useState<string>("");
-  const [dataString, setData] = useState<string>("");
-  useEffect(() => {
-    if (account) {
-      const sendObj: {
-        from: string;
-        to?: string;
-        value?: string;
-        data?: string;
-      } = {
-        from: fromString,
-      };
-      if (toString) {
-        sendObj.to = toString;
-      }
-      if (valueString) {
-        sendObj.value = web3.utils.toHex(valueString);
-      }
-      if (dataString) {
-        sendObj.data = dataString;
-      }
-      setRequestObject([sendObj]);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [account, fromString, toString, dataString, valueString]);
-  useEffect(() => {
-    setFrom(account || "");
-  }, [account]);
+  const setTransactionObject = useCallback(
+    (params: EthereumTypes.EIP1193RequestPayload["params"] | undefined) => {
+      setRequestObject({
+        method: "eth_sendTransaction",
+        params,
+      });
+    },
+    [setRequestObject]
+  );
 
   return (
-    <Grid templateColumns="min-content 1fr" alignItems="center" gap={6}>
-      <Box mx="10px">From:</Box>
-      <Textarea
-        rows={1}
-        value={fromString}
-        onChange={(e) => {
-          setFrom(e.target.value);
-        }}
-      />
-      <Box mx="10px">To:</Box>
-      <Textarea
-        rows={1}
-        value={toString}
-        onChange={(e) => {
-          setTo(e.target.value);
-        }}
-      />
-      <Box mx="10px">Value:</Box>
-      <Textarea
-        rows={1}
-        value={valueString}
-        onChange={(e) => {
-          setValue(e.target.value);
-        }}
-      />
-      <Box mx="10px">Data:</Box>
-      <Textarea
-        rows={3}
-        value={dataString}
-        onChange={(e) => {
-          setData(e.target.value);
-        }}
-      />
-    </Grid>
+    <EvmTxForm setTransactionObject={setTransactionObject} account={account} />
   );
 };
 
