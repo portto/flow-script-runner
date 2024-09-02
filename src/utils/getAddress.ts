@@ -7,8 +7,6 @@ export default function getAddress(key: string): string {
         return "0xe0f601b5afd47581";
       case "FungibleToken":
         return "0xf233dcee88fe0abe";
-      case "FUSD":
-        return "0x3c5959b568896393";
       case "BloctoToken":
         return "0x0f9df91c9121c460";
       case "TeleportedTetherToken":
@@ -26,12 +24,10 @@ export default function getAddress(key: string): string {
         return "0x7deafdfc288e422d";
       case "FungibleToken":
         return "0x9a0766d93b6608b7";
-      case "FUSD":
-        return "0xe223d8a629e49c68";
       case "BloctoToken":
-        return "0x6e0797ac987005f5";
+        return "0x653cfe36d146e7be";
       case "TeleportedTetherToken":
-        return "0xab26e0a07d770ec1";
+        return "0x2d270db9ac8c7fef";
       case "BloctoPrize":
         return "0xc52330593c1d935f";
       default:
