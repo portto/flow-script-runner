@@ -133,12 +133,16 @@ export const supportedChains = [
     faucet: "https://docs.scroll.io/en/user-guide/faucet/",
     environment: "testnet",
   },
-  {
-    name: "Linea",
-    chainId: "0xe708",
-    rpcUrls: ["https://rpc.linea.build"],
-    environment: "mainnet",
-  },
+  /**
+   * be api (https://api.blocto.app/networks/evm) not be supported
+   * sdk load supported chains error
+   */
+  // {
+  //   name: "Linea",
+  //   chainId: "0xe708",
+  //   rpcUrls: ["https://rpc.linea.build"],
+  //   environment: "mainnet",
+  // },
   {
     name: "zKatana Sepolia Testnet",
     chainId: "0x133e40",
@@ -173,20 +177,20 @@ export const supportedChains = [
   },
 ];
 
+const switchableChains = supportedChains.map((chain) => ({
+  chainId: chain.chainId,
+  rpcUrls: chain.rpcUrls,
+}));
+
 const bloctoSDK = new BloctoSDK({
   ethereum: {
     // (required) chainId to be used
-    chainId: isMainnet ? "0x1" : "0xaa36a7",
-    // (required for Ethereum) JSON RPC endpoint
-    rpc: isMainnet
-      ? `https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`
-      : "https://ethereum-sepolia.blockpi.network/v1/rpc/public",
+    defaultChainId: isMainnet ? "0x1" : "0xaa36a7",
     walletServer: process.env.REACT_APP_WALLET_SERVER,
+    switchableChains,
   },
   appId: process.env.REACT_APP_DAPP_ID,
 }) as ExtendedEvmBloctoSDK;
-
-bloctoSDK.ethereum.loadSwitchableNetwork(supportedChains);
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
