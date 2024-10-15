@@ -171,6 +171,12 @@ export const supportedChains = [
     faucet: "https://coinfaucet.eu/en/btc-testnet/",
     environment: "testnet",
   },
+  {
+    name: "Iliad Testnet",
+    chainId: "0x5e9",
+    rpcUrls: ["https://testnet.storyrpc.io/"],
+    environment: "testnet",
+  },
 ];
 
 const bloctoSDK = new BloctoSDK({
